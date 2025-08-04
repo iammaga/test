@@ -1,67 +1,56 @@
-function myFunction(p1, p2) {
-    return p1 / p2;
-}
+// all Users
+fetch('https://reqres.in/api/users', {
+    headers: {
+        'x-api-key': 'reqres-free-v1'
+    }
+})
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
 
-let result = myFunction(4, 3);
-document.getElementById("demo").innerHTML = result;
+        const users = data.data;
+        const container = document.getElementById('user-list');
 
-const cars = ["Saab", "Volvo", "BMW"];
-console.log(cars[1]);
+        users.forEach(user => {
+            const card = document.createElement('div');
+            card.className = 'bg-white p-4 rounded shadow flex items-center space-x-4';
 
-const car = {
-    name: "mers",
-    color: "red",
-    model: "300",
-    image: "image.png"
-};
+            card.innerHTML = `
+                <img src="${user.avatar}" alt="${user.first_name}" class="w-16 h-16 rounded-full" />
+                <div>
+                <p class="text-lg font-semibold">${user.first_name} ${user.last_name}</p>
+                <p class="text-sm text-gray-500">${user.email}</p>
+                </div>
+            `;
 
-document.getElementById('name').innerHTML = car.name;
-document.getElementById('color').innerHTML = car.color;
-document.getElementById('model').innerHTML = car.model;
-document.getElementById('image').innerHTML = car.image;
+            container.appendChild(card);
+        });
+    })
+    .catch(err => console.error('Ошибка:', err));
 
-let paragraph = document.getElementsByTagName('p');
+fetch('https://reqres.in/api/users/2', {
+    headers: {
+        'x-api-key': 'reqres-free-v1'
+    }
+})
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
 
-for (i = 0; i < paragraph.length; i++) {
-    paragraph[i].style.color = "red"
-    paragraph[i].style.fontSize = "24px"
-}
+        const user = data.data;
+        const container = document.getElementById('user');
 
-let flex = document.getElementsByClassName('flex');
+        const card = document.createElement('div');
+        card.className = 'bg-white p-4 rounded shadow flex items-center space-x-4';
 
-for (let i = 0; i < flex.length; i++) {
-    flex[i].style.color = 'blue';
-}
+        card.innerHTML = `
+                <img src="${user.avatar}" alt="${user.first_name}" class="w-16 h-16 rounded-full" />
+                <div>
+                <p class="text-lg font-semibold">${user.first_name} ${user.last_name}</p>
+                <p class="text-sm text-gray-500">${user.email}</p>
+                </div>
+            `;
 
-console.log(document.baseURI);
-
-
-const elements = document.querySelectorAll('#demo');
-elements.forEach(el => {
-    el.style.color = "grey";
-});
-
-document.writeln('asdsa');
-console.log('asdsa');
-
-let random = Math.floor(Math.random() * 100);
-console.log(random);
-
-function test() {
-    let x = document.getElementById("change").value;
-    document.getElementById("demo").innerHTML = x;
-}
-
-function bigImg(x) {
-    x.style.color = "red";
-    x.style.fontSize = "24px";
-}
-
-function normalImg(x) {
-    x.style.color = "blue";
-    x.style.fontSize = "24px";
-}
-
-function me() {
-    console.log("Muhammad");
-}
+        container.appendChild(card);
+    })
+    .catch(err => console.error('Ошибка:', err));
