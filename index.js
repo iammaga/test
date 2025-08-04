@@ -28,6 +28,7 @@ fetch('https://reqres.in/api/users', {
     })
     .catch(err => console.error('Ошибка:', err));
 
+// single User
 fetch('https://reqres.in/api/users/2', {
     headers: {
         'x-api-key': 'reqres-free-v1'
